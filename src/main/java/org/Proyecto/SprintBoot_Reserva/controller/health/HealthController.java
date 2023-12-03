@@ -1,16 +1,17 @@
 package org.Proyecto.SprintBoot_Reserva.controller.health;
 
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class HealthController {
 
-   @RequestMapping("/health")
+   @RequestMapping("/health/{name}")
 
-    public String checkAPI(){
+    public String checkAPI(@PathVariable (value = "name")String name){
 
-       return "<h1>The API is working ok!</h1>";
+       return String.format("<h1>The API is working ok!</h1>");
 
    }
 }
