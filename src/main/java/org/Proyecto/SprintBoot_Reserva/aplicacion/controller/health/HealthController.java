@@ -1,4 +1,4 @@
-package org.Proyecto.SprintBoot_Reserva.controller.health;
+package org.Proyecto.SprintBoot_Reserva.aplicacion.controller.health;
 
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
