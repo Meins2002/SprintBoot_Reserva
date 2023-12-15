@@ -5,27 +5,45 @@ import org.Proyecto.SprintBoot_Reserva.dominio.entidades.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-
+import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/v1/usuarios")
 public class UsuarioController {
+
+    private final UsuarioServicio usuarioServicio;
+
     @Autowired
-    private UsuarioServicio usuarioServicio;
+    public UsuarioController(UsuarioServicio usuarioServicio) {
+        this.usuarioServicio = usuarioServicio;
+    }
 
     @PostMapping
-    public Usuario create(@RequestBody Usuario usuario) {
-        return usuarioServicio.create(usuario);
+    public Usuario crear(@RequestBody Usuario usuario) {
+        return usuarioServicio.crear(usuario);
     }
 
     @PutMapping("/{id}")
-    public Usuario update(@PathVariable String id, @RequestBody Usuario usuario) {
-        return usuarioServicio.update(usuario);
+    public Usuario actualizar(@PathVariable Long id, @RequestBody Usuario usuario) {
+        usuario.setId(id);
+
+// Asegúrate de establecer el ID antes de actualizar
+        return usuarioServicio.actualizar(usuario);
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable String id) {
-        usuarioServicio.delete(id);
+    public void eliminar(@PathVariable Long id) {
+        usuarioServicio.eliminar(id);
     }
 
+    @GetMapping("/{id}")
+    public Optional<Usuario> obtenerPorId(@PathVariable Long id) {
+        return usuarioServicio.findById(id);
+    }
+
+    @GetMapping
+    public List<Usuario> obtenerTodos() {
+        return usuarioServicio.obtenerTodos();
+    }
 }
