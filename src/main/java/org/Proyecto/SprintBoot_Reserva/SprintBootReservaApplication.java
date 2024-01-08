@@ -11,6 +11,4 @@ public class SprintBootReservaApplication {
 
 		SpringApplication.run(SprintBootReservaApplication.class, args);
 	}
-	
-
 }

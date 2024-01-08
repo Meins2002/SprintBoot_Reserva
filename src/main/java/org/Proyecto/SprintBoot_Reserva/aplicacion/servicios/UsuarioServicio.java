@@ -1,42 +1,41 @@
 package org.Proyecto.SprintBoot_Reserva.aplicacion.servicios;
 
+
 import org.Proyecto.SprintBoot_Reserva.dominio.entidades.Usuario;
-import org.Proyecto.SprintBoot_Reserva.dominio.interfase.interfaseUsuario;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+        import org.Proyecto.SprintBoot_Reserva.dominio.repositorio.UsuarioRepositorio;
+        import org.springframework.beans.factory.annotation.Autowired;
+        import org.springframework.stereotype.Service;
 
-
-import java.util.Map;
-
+        import java.util.List;
+        import java.util.Optional;
 
 @Service
-public class UsuarioServicio implements interfaseUsuario {
+public class UsuarioServicio {
 
-   private Map<String, Usuario> usuarios;
+    private final UsuarioRepositorio usuarioRepositorio;
+
     @Autowired
-   public UsuarioServicio(Map<String, Usuario> usuarios){
-        this.usuarios =usuarios;
-    }
-    @Override
-    public Usuario create(Usuario usuario) {
-    usuarios.put(String.valueOf(usuario.getId()), usuario);
-        return usuario;
+    public UsuarioServicio(UsuarioRepositorio usuarioRepositorio) {
+        this.usuarioRepositorio = usuarioRepositorio;
     }
 
-    @Override
-    public Usuario read(String id) {
-    return usuarios.get(id);
+    public Usuario crear(Usuario usuario) {
+        return usuarioRepositorio.save(usuario);
     }
 
-    @Override
-    public Usuario update(Usuario usuario) {
-        usuarios.put(String.valueOf(usuario.getId()), usuario);
-        return usuario;
+    public Usuario actualizar(Usuario usuario) {
+        return usuarioRepositorio.save(usuario);
     }
 
-    @Override
-    public void delete(String id) {
-        usuarios.remove(id);
+    public void eliminar(Long id) {
+        usuarioRepositorio.deleteById(id);
     }
 
+    public Optional<Usuario> findById(Long id) {
+        return usuarioRepositorio.findById(id);
+    }
+
+    public List<Usuario> obtenerTodos() {
+        return usuarioRepositorio.findAll();
+    }
 }
