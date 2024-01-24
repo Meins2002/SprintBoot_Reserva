@@ -8,6 +8,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.springframework.security.core.userdetails.UserDetails;
 
 
 @Getter
@@ -15,11 +16,11 @@ import lombok.ToString;
 @ToString
 @AllArgsConstructor
 @Entity
-public class Usuario {
+public class Usuario{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nombre;
     private String correo;
-
+    private String password;
 }
